@@ -1,0 +1,37 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
+      - run: npm ci
+
+      - name: Prepare environment
+        run: |
+          cp .env.example .env
+          echo "AUTH_SECRET=$(openssl rand -base64 48 | tr -d '\n')" >> .env
+
+      - run: npm run typecheck
+
+      # Seeds through the real background pipeline, so this also smoke-tests
+      # PDF parsing, chunking, indexing, concept extraction and the job queue.
+      - run: npm run setup
+
+      - run: npm test
+
+      # Exits non-zero if AI behaviour regressed against the previous run.
+      # Runs on the offline provider, so no API key or spend is needed in CI.
+      - run: npm run eval
+
+      - run: npm run build

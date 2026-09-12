@@ -1,0 +1,26 @@
+node_modules/
+.next/
+out/
+build/
+dist/
+*.log
+.env
+.env.local
+.env*.local
+!.env.example
+prisma/*.db
+prisma/*.db-journal
+prisma/dev.db*
+# Anchored to the repository root: an unanchored `storage/` also matches
+# src/lib/storage, which would exclude a source module from the repository.
+/storage/
+.vercel
+.DS_Store
+*.tsbuildinfo
+next-env.d.ts
+coverage/
+.eval-runs/
+.test-tmp/
+# Demo PDFs are generated deterministically by the seed from
+# prisma/sample/content.ts — regenerate with `npm run db:seed`.
+prisma/sample/generated/
