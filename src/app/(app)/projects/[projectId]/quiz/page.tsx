@@ -1,12 +1,12 @@
 import { Suspense } from "react";
-import { requireUser } from "@/lib/auth/session";
+import { requireUserPage } from "@/lib/auth/session";
 import { assertProjectAccess } from "@/lib/auth/ownership";
 import { db } from "@/lib/db";
 import { QuizPanel } from "@/components/quiz";
 import { Card } from "@/components/ui";
 
 export default async function QuizPage({ params }: { params: Promise<{ projectId: string }> }) {
-  const user = await requireUser();
+  const user = await requireUserPage();
   const { projectId } = await params;
   await assertProjectAccess(user.id, projectId);
 

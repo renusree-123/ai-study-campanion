@@ -1,4 +1,4 @@
-import { requireAdmin } from "@/lib/auth/session";
+import { requireAdminPage } from "@/lib/auth/session";
 import { getSystemHealth } from "@/lib/domain/admin";
 import { db } from "@/lib/db";
 import { Badge, Card, SectionTitle, Stat, StatGrid, formatDuration, formatRelative } from "@/components/ui";
@@ -10,7 +10,7 @@ export const revalidate = 0;
 
 /** Admin system health (PRD §64). */
 export default async function AdminHealthPage() {
-  await requireAdmin();
+  await requireAdminPage();
 
   const [health, recentJobs, failedJobs, failedEvents] = await Promise.all([
     getSystemHealth(),

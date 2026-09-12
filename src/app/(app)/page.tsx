@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { requireUser } from "@/lib/auth/session";
+import { requireUserPage } from "@/lib/auth/session";
 import { db } from "@/lib/db";
 import { getGlobalAnalytics } from "@/lib/domain/analytics";
 import { topRecommendationsForUser } from "@/lib/domain/recommendations";
@@ -25,7 +25,7 @@ import { ActivityList, RecommendationCard, TrendBadge } from "@/components/learn
  * attention, and what should I do next.
  */
 export default async function HomePage() {
-  const user = await requireUser();
+  const user = await requireUserPage();
 
   const [analytics, recommendations, recentProjects, weakConcepts, activity, lastActivity] =
     await Promise.all([

@@ -1,4 +1,4 @@
-import { requireUser } from "@/lib/auth/session";
+import { requireUserPage } from "@/lib/auth/session";
 import { assertProjectAccess } from "@/lib/auth/ownership";
 import { getProjectAnalytics } from "@/lib/domain/analytics";
 import {
@@ -18,7 +18,7 @@ export default async function ProjectAnalyticsPage({
 }: {
   params: Promise<{ projectId: string }>;
 }) {
-  const user = await requireUser();
+  const user = await requireUserPage();
   const { projectId } = await params;
   await assertProjectAccess(user.id, projectId);
 

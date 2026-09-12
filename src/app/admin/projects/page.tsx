@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { requireAdmin } from "@/lib/auth/session";
+import { requireAdminPage } from "@/lib/auth/session";
 import { getAdminProjects } from "@/lib/domain/admin";
 import { Card, SectionTitle, formatRelative } from "@/components/ui";
 import { Table, Td, Tr } from "@/components/table";
@@ -7,7 +7,7 @@ import { ChartTheme, MasteryMeter } from "@/components/charts";
 
 /** Admin projects (PRD §60). */
 export default async function AdminProjectsPage() {
-  await requireAdmin();
+  await requireAdminPage();
   const projects = await getAdminProjects();
 
   return (

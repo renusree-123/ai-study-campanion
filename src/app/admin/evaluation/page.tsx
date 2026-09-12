@@ -1,4 +1,4 @@
-import { requireAdmin } from "@/lib/auth/session";
+import { requireAdminPage } from "@/lib/auth/session";
 import { db } from "@/lib/db";
 import { parseJson } from "@/lib/json";
 import { allCases } from "@/lib/eval/dataset";
@@ -18,7 +18,7 @@ import { ChartTheme, LineChart } from "@/components/charts";
 
 /** AI evaluation & regression view (PRD §46, §47, §63). */
 export default async function AdminEvaluationPage() {
-  await requireAdmin();
+  await requireAdminPage();
 
   const runs = await db.evalRun.findMany({
     orderBy: { startedAt: "desc" },

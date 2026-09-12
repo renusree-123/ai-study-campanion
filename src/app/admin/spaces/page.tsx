@@ -1,12 +1,12 @@
 import Link from "next/link";
-import { requireAdmin } from "@/lib/auth/session";
+import { requireAdminPage } from "@/lib/auth/session";
 import { getAdminSpaces } from "@/lib/domain/admin";
 import { Card, SectionTitle, formatRelative } from "@/components/ui";
 import { Table, Td, Tr } from "@/components/table";
 
 /** Admin spaces (PRD §60). */
 export default async function AdminSpacesPage() {
-  await requireAdmin();
+  await requireAdminPage();
   const spaces = await getAdminSpaces();
 
   return (

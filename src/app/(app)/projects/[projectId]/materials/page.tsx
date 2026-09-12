@@ -1,4 +1,4 @@
-import { requireUser } from "@/lib/auth/session";
+import { requireUserPage } from "@/lib/auth/session";
 import { assertProjectAccess } from "@/lib/auth/ownership";
 import { db } from "@/lib/db";
 import { MaterialsPanel } from "@/components/materials";
@@ -8,7 +8,7 @@ export default async function MaterialsPage({
 }: {
   params: Promise<{ projectId: string }>;
 }) {
-  const user = await requireUser();
+  const user = await requireUserPage();
   const { projectId } = await params;
   await assertProjectAccess(user.id, projectId);
 

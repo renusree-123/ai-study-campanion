@@ -90,7 +90,8 @@ Everything then routes to `claude-opus-5` through the same interfaces.
 
 | Command                | What it does                                                     |
 | ---------------------- | ---------------------------------------------------------------- |
-| `npm run dev`          | Dev server, with the background worker in-process                 |
+| `npm run dev`          | Dev server (Turbopack), with the background worker in-process     |
+| `npm run dev:webpack`  | Dev server on webpack, if you need to compare bundlers            |
 | `npm run build`        | Production build                                                  |
 | `npm start`            | Run the production build                                          |
 | `npm run worker`       | Standalone background worker (set `WORKER_IN_PROCESS=false`)      |

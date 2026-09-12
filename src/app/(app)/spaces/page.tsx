@@ -1,12 +1,12 @@
 import Link from "next/link";
-import { requireUser } from "@/lib/auth/session";
+import { requireUserPage } from "@/lib/auth/session";
 import { db } from "@/lib/db";
 import { Card, EmptyState, SectionTitle, formatRelative } from "@/components/ui";
 import { ChartTheme, MasteryMeter } from "@/components/charts";
 import { CreateSpaceButton } from "@/components/dialogs";
 
 export default async function SpacesPage() {
-  const user = await requireUser();
+  const user = await requireUserPage();
 
   const spaces = await db.space.findMany({
     where: { userId: user.id, archivedAt: null },

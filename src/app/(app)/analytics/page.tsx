@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { requireUser } from "@/lib/auth/session";
+import { requireUserPage } from "@/lib/auth/session";
 import { getGlobalAnalytics } from "@/lib/domain/analytics";
 import { db } from "@/lib/db";
 import {
@@ -17,7 +17,7 @@ import { TrendBadge } from "@/components/learning";
 
 /** Global user analytics (PRD §35, §36). */
 export default async function GlobalAnalyticsPage() {
-  const user = await requireUser();
+  const user = await requireUserPage();
 
   const [analytics, weakest, strongest] = await Promise.all([
     getGlobalAnalytics(user.id, 30),

@@ -1,4 +1,4 @@
-import { requireUser } from "@/lib/auth/session";
+import { requireUserPage } from "@/lib/auth/session";
 import { assertProjectAccess } from "@/lib/auth/ownership";
 import { getGrowth, getMasteryTimeline } from "@/lib/domain/analytics";
 import { activeRecommendations } from "@/lib/domain/recommendations";
@@ -21,7 +21,7 @@ export default async function GrowthPage({
 }: {
   params: Promise<{ projectId: string }>;
 }) {
-  const user = await requireUser();
+  const user = await requireUserPage();
   const { projectId } = await params;
   await assertProjectAccess(user.id, projectId);
 

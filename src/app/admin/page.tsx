@@ -1,4 +1,4 @@
-import { requireAdmin } from "@/lib/auth/session";
+import { requireAdminPage } from "@/lib/auth/session";
 import { getAdminOverview } from "@/lib/domain/admin";
 import {
   Badge,
@@ -15,7 +15,7 @@ import { ChartTheme } from "@/components/charts";
 
 /** Admin overview (PRD §57). */
 export default async function AdminOverviewPage() {
-  await requireAdmin();
+  await requireAdminPage();
   const overview = await getAdminOverview(30);
 
   return (

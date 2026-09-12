@@ -1,4 +1,4 @@
-import { requireAdmin } from "@/lib/auth/session";
+import { requireAdminPage } from "@/lib/auth/session";
 import { getAdminAiUsage } from "@/lib/domain/admin";
 import { listPrompts } from "@/lib/ai/prompts";
 import { listTools } from "@/lib/ai/tools";
@@ -19,7 +19,7 @@ import { Table, Td, Tr } from "@/components/table";
 
 /** Admin AI usage and observability (PRD §43, §44, §63). */
 export default async function AdminAiPage() {
-  await requireAdmin();
+  await requireAdminPage();
   const [usage, prompts, tools] = await Promise.all([
     getAdminAiUsage(30),
     Promise.resolve(listPrompts()),

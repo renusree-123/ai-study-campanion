@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { requireUser } from "@/lib/auth/session";
+import { requireUserPage } from "@/lib/auth/session";
 import { assertSpaceAccess } from "@/lib/auth/ownership";
 import { db } from "@/lib/db";
 import {
@@ -19,7 +19,7 @@ import { ActivityList, TrendBadge } from "@/components/learning";
 
 /** Space dashboard (PRD §7). */
 export default async function SpacePage({ params }: { params: Promise<{ spaceId: string }> }) {
-  const user = await requireUser();
+  const user = await requireUserPage();
   const { spaceId } = await params;
 
   const space = await assertSpaceAccess(user.id, spaceId).catch(() => null);

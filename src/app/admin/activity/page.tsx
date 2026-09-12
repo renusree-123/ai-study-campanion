@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { requireAdmin } from "@/lib/auth/session";
+import { requireAdminPage } from "@/lib/auth/session";
 import { getAdminActivity } from "@/lib/domain/admin";
 import { ACTIVITY_TYPES, activityLabel } from "@/lib/activity";
 import { Card, SectionTitle, formatRelative } from "@/components/ui";
@@ -11,7 +11,7 @@ export default async function AdminActivityPage({
 }: {
   searchParams: Promise<{ type?: string; days?: string; userId?: string; projectId?: string }>;
 }) {
-  await requireAdmin();
+  await requireAdminPage();
   const query = await searchParams;
   const days = Number(query.days ?? 30);
 

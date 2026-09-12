@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { requireAdmin } from "@/lib/auth/session";
+import { requireAdminPage } from "@/lib/auth/session";
 import { getAdminUsers } from "@/lib/domain/admin";
 import { Badge, Card, SectionTitle, formatPercent, formatRelative } from "@/components/ui";
 import { Table, Td, Tr } from "@/components/table";
@@ -11,7 +11,7 @@ export default async function AdminUsersPage({
 }: {
   searchParams: Promise<{ q?: string }>;
 }) {
-  await requireAdmin();
+  await requireAdminPage();
   const { q } = await searchParams;
   const users = await getAdminUsers({ search: q });
 

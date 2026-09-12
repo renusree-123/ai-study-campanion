@@ -1,5 +1,5 @@
 import { Suspense } from "react";
-import { requireUser } from "@/lib/auth/session";
+import { requireUserPage } from "@/lib/auth/session";
 import { assertProjectAccess } from "@/lib/auth/ownership";
 import { db } from "@/lib/db";
 import { parseJson } from "@/lib/json";
@@ -11,7 +11,7 @@ export default async function TutorPage({
 }: {
   params: Promise<{ projectId: string }>;
 }) {
-  const user = await requireUser();
+  const user = await requireUserPage();
   const { projectId } = await params;
   await assertProjectAccess(user.id, projectId);
 

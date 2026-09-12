@@ -1,5 +1,6 @@
 import { SignJWT, jwtVerify } from "jose";
 import { cookies } from "next/headers";
+import { redirect } from "next/navigation";
 import { assertProductionSecrets, env } from "../env";
 import { unauthenticated, forbidden } from "../errors";
 import { db } from "../db";
@@ -91,6 +92,31 @@ export async function requireUser(): Promise<SessionUser> {
 export async function requireAdmin(): Promise<SessionUser> {
   const user = await requireUser();
   if (user.role !== "ADMIN") throw forbidden("Administrator access required.");
+  return user;
+}
+
+/**
+ * Page equivalents of `requireUser` / `requireAdmin`.
+ *
+ * A server component that throws AppError for an unauthenticated visitor gets
+ * logged as an unhandled error, even though the surrounding layout is already
+ * redirecting them — which buries real errors in noise. In a page, "not signed
+ * in" is a redirect, not a fault. `redirect()` throws a control-flow signal
+ * Next handles silently.
+ *
+ * Route handlers keep using `requireUser`/`requireAdmin`, where a 401/403 is
+ * the correct answer.
+ */
+export async function requireUserPage(): Promise<SessionUser> {
+  const user = await currentUser();
+  if (!user) redirect("/login");
+  return user;
+}
+
+export async function requireAdminPage(): Promise<SessionUser> {
+  const user = await currentUser();
+  if (!user) redirect("/login");
+  if (user.role !== "ADMIN") redirect("/");
   return user;
 }
 

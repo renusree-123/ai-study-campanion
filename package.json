@@ -4,7 +4,7 @@
   "private": true,
   "description": "AI-powered learning & growth workspace",
   "scripts": {
-    "dev": "next dev",
+    "dev": "next dev --turbopack",
     "build": "prisma generate && next build",
     "start": "next start",
     "worker": "tsx src/worker/index.ts",
@@ -18,9 +18,12 @@
     "db:seed": "tsx prisma/seed.ts",
     "db:reset": "prisma db push --force-reset && npm run db:seed",
     "eval": "tsx src/lib/eval/cli.ts",
-    "setup": "prisma generate && prisma db push && npm run db:seed"
+    "setup": "prisma generate && prisma db push && npm run db:seed",
+    "dev:webpack": "next dev"
   },
-  "prisma": { "seed": "tsx prisma/seed.ts" },
+  "prisma": {
+    "seed": "tsx prisma/seed.ts"
+  },
   "dependencies": {
     "@anthropic-ai/sdk": "^0.71.0",
     "@prisma/client": "^6.16.2",
@@ -42,5 +45,7 @@
     "typescript": "^5.9.2",
     "vitest": "^3.2.4"
   },
-  "engines": { "node": ">=20.0.0" }
+  "engines": {
+    "node": ">=20.0.0"
+  }
 }

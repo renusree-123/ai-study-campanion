@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { requireAdmin } from "@/lib/auth/session";
+import { requireAdminPage } from "@/lib/auth/session";
 import { getAdminUserDetail } from "@/lib/domain/admin";
 import {
   Badge,
@@ -22,7 +22,7 @@ export default async function AdminUserDetailPage({
 }: {
   params: Promise<{ userId: string }>;
 }) {
-  await requireAdmin();
+  await requireAdminPage();
   const { userId } = await params;
   const detail = await getAdminUserDetail(userId);
   if (!detail) notFound();

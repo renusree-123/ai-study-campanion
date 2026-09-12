@@ -1,4 +1,4 @@
-import { requireAdmin } from "@/lib/auth/session";
+import { requireAdminPage } from "@/lib/auth/session";
 import { getAdminLearningAnalytics } from "@/lib/domain/admin";
 import { activityLabel } from "@/lib/activity";
 import {
@@ -15,7 +15,7 @@ import { Table, Td, Tr } from "@/components/table";
 
 /** Admin learning analytics (PRD §62). */
 export default async function AdminAnalyticsPage() {
-  await requireAdmin();
+  await requireAdminPage();
   const analytics = await getAdminLearningAnalytics(30);
 
   const totalAnswered = analytics.daily.reduce((s, d) => s + d.questionsAnswered, 0);
