@@ -10,7 +10,8 @@
 // Every string-enum column has its allowed values documented next to it.
 
 generator client {
-  provider = "prisma-client-js"
+  provider      = "prisma-client-js"
+  binaryTargets = ["native", "windows"]
 }
 
 datasource db {
