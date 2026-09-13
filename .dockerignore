@@ -1,0 +1,14 @@
+node_modules
+.next
+.git
+.gitignore
+*.log
+.env
+.env.local
+storage/*
+!storage/.gitkeep
+dev.db
+dev.db-journal
+tests
+docs
+Project_Requirements.pdf
